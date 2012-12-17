@@ -55,6 +55,12 @@ function image_zoom = vizinho_mais_proximo(imagemEntrada, cx, cy)
   image_zoom = imagemEntrada(rowIndex,colIndex,:);
 endfunction
 
+# Parametros de entrada:
+# @imagemEntrada: A imagem a ser escalada.
+# @x:
+# @y:
+# @algoritmo: Tipo do algoritmo a ser usado: 'vizinho' ou 'bilinear'.
+#
 function image_zoom = muda_escala(imagemEntrada, x, y, algoritmo)
   if (x < 0)
     error("O valor de x é inválido, os valores aceitos são 0 até infinito.");
