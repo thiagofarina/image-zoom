@@ -3,7 +3,7 @@
 #  source("muda_escala.m");
 #  imagemOriginal = imread("porsche.jpg");
 #  imagemFinal = muda_escala(imagemOriginal, 2, 2, "vizinho");
-#  imwrite(imagemFinal, "porsche-zoom.jpg");
+#  imwrite(imagemFinal, "porsche-vizinho.jpg");
 #
 
 function imagemSaida = bilinear(imagemEntrada, cx, cy)
