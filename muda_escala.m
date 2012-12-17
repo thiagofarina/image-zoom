@@ -12,7 +12,7 @@ function imagemSaida = bilinear(imagemEntrada, cx, cy)
   num_colunas = floor(cy * coluna);
   im_zoom = zeros(num_linhas, num_colunas, dimensao);
 
-  for i = 1:num_linhas;
+  for i = 1:num_linhas
     x1 = cast(floor(i / cx), 'uint16');
     x2 = cast(ceil(i / cx), 'uint16');
 
@@ -22,7 +22,7 @@ function imagemSaida = bilinear(imagemEntrada, cx, cy)
 
     x = rem(i / cx, 1);
 
-    for j = 1:num_colunas;
+    for j = 1:num_colunas
       y1 = cast(floor(j / cy), 'uint16');
       y2 = cast(ceil(j / cy), 'uint16');
 
