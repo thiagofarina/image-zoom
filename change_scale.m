@@ -1,3 +1,10 @@
+# Exemplo:
+#
+#  imagemOriginal = imread("porsche.jpg");
+#  imagemFinal = change_scale(imagemOriginal, 2, 2, "neighbor");
+#  imwrite(imagemFinal, "porsche-zoom.jpg");
+#
+
 function image_zoom = bilinear(image, cx, cy)
   [r c d] = size(image);
   rn = floor(cx*r);
