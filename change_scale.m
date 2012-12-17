@@ -1,4 +1,4 @@
-function image_zoom = bilinear_interp(image, cx, cy)
+function image_zoom = bilinear(image, cx, cy)
   [r c d] = size(image);
   rn = floor(cx*r);
   cn = floor(cy*c);
@@ -37,7 +37,7 @@ function image_zoom = bilinear_interp(image, cx, cy)
   image_zoom = cast(im_zoom, 'uint16');
 endfunction
 
-function image_zoom = neighbor(imagemEntrada, cx, cy)
+function image_zoom = vizinho_mais_proximo(imagemEntrada, cx, cy)
   scale = [cx cy];
   oldSize = size(imagemEntrada);
   newSize = max(floor(scale.*oldSize(1:2)),1);
@@ -58,9 +58,9 @@ function image_zoom = change_scale(imagemEntrada, x, y, algoritmo)
   endif
 
   if (algoritmo == "neighbor")
-    image_zoom = neighbor(imagemEntrada, x, y);
+    image_zoom = vizinho_mais_proximo(imagemEntrada, x, y);
   elseif (algoritmo == "bilinear")
-    image_zoom = bilinear_interp(imagemEntrada, x, y);
+    image_zoom = bilinear(imagemEntrada, x, y);
   else
     error("Algoritmo inválido, somente neighbor ou bilinear são aceitos.");
   endif
