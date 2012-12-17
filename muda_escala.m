@@ -5,8 +5,8 @@
 #  imwrite(imagemFinal, "porsche-zoom.jpg");
 #
 
-function image_zoom = bilinear(image, cx, cy)
-  [r c d] = size(image);
+function image_zoom = bilinear(imagemEntrada, cx, cy)
+  [r c d] = size(imagemEntrada);
   rn = floor(cx*r);
   cn = floor(cy*c);
   im_zoom = zeros(rn, cn, d);
@@ -29,10 +29,10 @@ function image_zoom = bilinear(image, cx, cy)
         y1 = 1;
       endif
 
-      ctl = image(x1,y1,:);
-      cbl = image(x2,y1,:);
-      ctr = image(x1,y2,:);
-      cbr = image(x2,y2,:);
+      ctl = imagemEntrada(x1,y1,:);
+      cbl = imagemEntrada(x2,y1,:);
+      ctr = imagemEntrada(x1,y2,:);
+      cbr = imagemEntrada(x2,y2,:);
 
       y = rem(j / cy, 1);
       tr = (ctr * y) + (ctl * (1 - y));
