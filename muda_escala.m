@@ -5,7 +5,7 @@
 #  imwrite(imagemFinal, "porsche-zoom.jpg");
 #
 
-function image_zoom = bilinear(imagemEntrada, cx, cy)
+function imagemSaida = bilinear(imagemEntrada, cx, cy)
   [linha coluna dimensao] = size(imagemEntrada);
   num_linhas = floor(cx * linha);
   num_colunas = floor(cy * coluna);
@@ -41,18 +41,18 @@ function image_zoom = bilinear(imagemEntrada, cx, cy)
       im_zoom(i, j, :) = (br * x) + (tr * (1 - x));
     endfor
   endfor
-  image_zoom = cast(im_zoom, 'uint16');
+  imagemSaida = cast(im_zoom, 'uint16');
 endfunction
 
-function image_zoom = vizinho_mais_proximo(imagemEntrada, cx, cy)
-  scale = [cx cy];
-  oldSize = size(imagemEntrada);
-  newSize = max(floor(scale.*oldSize(1:2)),1);
+function imagemSaida = vizinho_mais_proximo(imagemEntrada, cx, cy)
+  escala = [cx cy];
+  tamanhoAntigo = size(imagemEntrada);
+  tamanhoNovo = max(floor(escala.*tamanhoAntigo(1:2)), 1);
 
-  rowIndex = min(round(((1:newSize(1))-0.5)./scale(1)+0.5),oldSize(1));
-  colIndex = min(round(((1:newSize(2))-0.5)./scale(2)+0.5),oldSize(2));
+  index_linha = min(round(((1:tamanhoNovo(1))-0.5)./escala(1)+0.5), tamanhoAntigo(1));
+  index_coluna = min(round(((1:tamanhoNovo(2))-0.5)./escala(2)+0.5), tamanhoAntigo(2));
 
-  image_zoom = imagemEntrada(rowIndex,colIndex,:);
+  imagemSaida = imagemEntrada(index_linha, index_coluna, :);
 endfunction
 
 # Parametros de entrada:
@@ -61,7 +61,7 @@ endfunction
 # @y:
 # @algoritmo: Tipo do algoritmo a ser usado: 'vizinho' ou 'bilinear'.
 #
-function image_zoom = muda_escala(imagemEntrada, x, y, algoritmo)
+function imagemSaida = muda_escala(imagemEntrada, x, y, algoritmo)
   if (x < 0)
     error("O valor de x é inválido, os valores aceitos são 0 até infinito.");
   endif
@@ -71,9 +71,9 @@ function image_zoom = muda_escala(imagemEntrada, x, y, algoritmo)
   endif
 
   if (algoritmo == "vizinho")
-    image_zoom = vizinho_mais_proximo(imagemEntrada, x, y);
+    imagemSaida = vizinho_mais_proximo(imagemEntrada, x, y);
   elseif (algoritmo == "bilinear")
-    image_zoom = bilinear(imagemEntrada, x, y);
+    imagemSaida = bilinear(imagemEntrada, x, y);
   else
     error("Algoritmo inválido, somente vizinho ou bilinear são aceitos.");
   endif
