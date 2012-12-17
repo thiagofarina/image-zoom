@@ -10,8 +10,9 @@ function imagemSaida = bilinear(imagemEntrada, cx, cy)
   [linha coluna dimensao] = size(imagemEntrada);
   num_linhas = floor(cx * linha);
   num_colunas = floor(cy * coluna);
-  im_zoom = zeros(num_linhas, num_colunas, dimensao);
+  preImagemSaidam = zeros(num_linhas, num_colunas, dimensao);
 
+  # Inicia o loop iterando pelaas linhas da nova matriz.
   for i = 1:num_linhas
     x1 = cast(floor(i / cx), 'uint16');
     x2 = cast(ceil(i / cx), 'uint16');
@@ -30,19 +31,20 @@ function imagemSaida = bilinear(imagemEntrada, cx, cy)
         y1 = 1;
       endif
 
-      ctl = imagemEntrada(x1,y1,:);
-      cbl = imagemEntrada(x2,y1,:);
-      ctr = imagemEntrada(x1,y2,:);
-      cbr = imagemEntrada(x2,y2,:);
+      coluna_topo_esquerda = imagemEntrada(x1, y1, :);
+      coluna_inferior_esquerda = imagemEntrada(x2,y1,:);
+      coluna_topo_direita = imagemEntrada(x1, y2, :);
+      coluna_inferior_direita = imagemEntrada(x2, y2, :);
 
       y = rem(j / cy, 1);
-      tr = (ctr * y) + (ctl * (1 - y));
-      br = (cbr * y) + (cbl * (1 - y));
+      topo_direita = (coluna_topo_direita * y) + (coluna_top_esquerda * (1 - y));
+      inferior_direita = (coluna_inferior_direita * y) + (coluna_inferior_esquerda * (1 - y));
 
-      im_zoom(i, j, :) = (br * x) + (tr * (1 - x));
+      preImagemSaida(i, j, :) = (inferior_direita * x) + (topo_direita * (1 - x));
     endfor
   endfor
-  imagemSaida = cast(im_zoom, 'uint16');
+
+  imagemSaida = cast(preImagemSaida, 'uint16');
 endfunction
 
 function imagemSaida = vizinho_mais_proximo(imagemEntrada, x, y)
