@@ -58,10 +58,13 @@ function imagemSaida = vizinho_mais_proximo(imagemEntrada, x, y)
   imagemSaida = imagemEntrada(index_linha, index_coluna, :);
 endfunction
 
+# Essa função aumenta a imagem (escala) de entrada de acordo com os parametros
+# passados.
+#
 # Parametros de entrada:
 # @imagemEntrada: A imagem a ser escalada.
-# @x:
-# @y:
+# @x: Por quanto a largura da matriz deve ser aumentada.
+# @y: Por quanto a altura da matriz deve ser aumentada.
 # @algoritmo: Tipo do algoritmo a ser usado: 'vizinho' ou 'bilinear'.
 #
 function imagemSaida = muda_escala(imagemEntrada, x, y, algoritmo)
