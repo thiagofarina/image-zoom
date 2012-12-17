@@ -7,6 +7,8 @@
 #
 
 function imagemSaida = bilinear(imagemEntrada, cx, cy)
+  # Cria uma matriz aumentada com largura e alturas modificados (baseado nos
+  # parametros cx e cy).
   [linha coluna dimensao] = size(imagemEntrada);
   num_linhas = floor(cx * linha);
   num_colunas = floor(cy * coluna);
