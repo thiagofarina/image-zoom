@@ -45,13 +45,13 @@ function imagemSaida = bilinear(imagemEntrada, cx, cy)
   imagemSaida = cast(im_zoom, 'uint16');
 endfunction
 
-function imagemSaida = vizinho_mais_proximo(imagemEntrada, cx, cy)
-  escala = [cx cy];
-  tamanhoAntigo = size(imagemEntrada);
-  tamanhoNovo = max(floor(escala.*tamanhoAntigo(1:2)), 1);
+function imagemSaida = vizinho_mais_proximo(imagemEntrada, x, y)
+  escala = [x y];
+  tamanhoAnterior = size(imagemEntrada);
+  tamanhoNovo = max(floor(escala.*tamanhoAnterior(1:2)), 1);
 
-  index_linha = min(round(((1:tamanhoNovo(1))-0.5)./escala(1)+0.5), tamanhoAntigo(1));
-  index_coluna = min(round(((1:tamanhoNovo(2))-0.5)./escala(2)+0.5), tamanhoAntigo(2));
+  index_linha = min(round(((1:tamanhoNovo(1))-0.5)./escala(1)+0.5), tamanhoAnterior(1));
+  index_coluna = min(round(((1:tamanhoNovo(2))-0.5)./escala(2)+0.5), tamanhoAnterior(2));
 
   imagemSaida = imagemEntrada(index_linha, index_coluna, :);
 endfunction
