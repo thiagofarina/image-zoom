@@ -1,7 +1,7 @@
 # Exemplo:
 #
 #  imagemOriginal = imread("porsche.jpg");
-#  imagemFinal = muda_escala(imagemOriginal, 2, 2, "neighbor");
+#  imagemFinal = muda_escala(imagemOriginal, 2, 2, "vizinho");
 #  imwrite(imagemFinal, "porsche-zoom.jpg");
 #
 
@@ -64,11 +64,11 @@ function image_zoom = muda_escala(imagemEntrada, x, y, algoritmo)
     error("O valor de y é inválido, os valores aceitos são 0 até infinito.");
   endif
 
-  if (algoritmo == "neighbor")
+  if (algoritmo == "vizinho")
     image_zoom = vizinho_mais_proximo(imagemEntrada, x, y);
   elseif (algoritmo == "bilinear")
     image_zoom = bilinear(imagemEntrada, x, y);
   else
-    error("Algoritmo inválido, somente neighbor ou bilinear são aceitos.");
+    error("Algoritmo inválido, somente vizinho ou bilinear são aceitos.");
   endif
 endfunction
